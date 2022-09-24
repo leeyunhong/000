@@ -1,6 +1,6 @@
 customhost = "leeyunhong-database.ctkzjljmwfwu.us-east-1.rds.amazonaws.com"
 customuser = "admin"
 custompass = "Admin123"
-customdb = "leeyunhong-database"
+customdb = "leeyunhong_database"
 custombucket = "leeyunhong-bucket"
 customregion = "us-east-1"
