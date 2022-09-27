@@ -104,9 +104,9 @@ def DeleteEmp():
     return render_template('GetEmp.html')
 
 @app.route("/Updateemp", methods=['POST'])
-def UpdateEmp():
+def UpdateEmp(emp_id):
     cursor = db_conn.cursor()
-    if request.methods == 'POST':
+    if request.methods =='POST':
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
