@@ -107,10 +107,10 @@ def DeleteEmp():
 def UpdateEmp(emp_id):
     cursor = db_conn.cursor()
     if request.methods =='POST':
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        pri_skill = request.form['pri_skill']
+        location = request.form['location']
 
     cursor.execute("""UPDATE employees SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
     conn.commit()
