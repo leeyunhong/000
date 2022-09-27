@@ -91,7 +91,7 @@ def AddEmp():
 
 @app.route('/getemp', methods = ['POST', 'GET'])
 def ViewEmp():
-    cursor = db_conn.cursor()
+    cursor = db_conn.cursor(pymysql.cursor.DictCursor)
     cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
     data = cur.fetchall()
     cursor.close()
