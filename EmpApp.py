@@ -90,9 +90,9 @@ def AddEmp():
 #    return render_template('GetEmp.html', data=data)
 
 @app.route('/getemp', methods = ['POST', 'GET'])
-def ViewEmp(emp_id):
+def ViewEmp():
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees WHERE id = %s', (emp_id))
+    cursor.execute('SELECT * FROM employees WHERE emp_id = %s', (emp_id))
     data = cur.fetchall()
     cursor.close()
     print(data[0])
