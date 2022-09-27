@@ -92,7 +92,7 @@ def AddEmp():
 @app.route('/getemp', methods = ['POST', 'GET'])
 def ViewEmp():
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees WHERE emp_id = %s', (emp_id))
+    cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
     data = cur.fetchall()
     cursor.close()
     print(data[0])
