@@ -117,10 +117,8 @@ def fetchdata():
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
             emp= cursor.fetchall()  
-            if (id,fname,lname,priSkill,location) = emp[0]
-                return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)                   
-            else:
-            return render_template('IdNotFound.html')
+            (id,fname,lname,priSkill,location) = emp[0]
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
