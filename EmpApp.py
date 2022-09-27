@@ -18,7 +18,7 @@ db_conn = connections.Connection(
 
 )
 output = {}
-table = 'employees'
+table = 'employee'
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -40,7 +40,7 @@ def AddEmp():
     location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employees VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -83,7 +83,7 @@ def AddEmp():
 @app.route("/getemp", methods=['POST'])
 def GetEmp():
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees')
+    cursor.execute('SELECT * FROM employee')
     data = cursor.fetchall()
     cursor.close()
     print(data[0])
@@ -92,7 +92,7 @@ def GetEmp():
 @app.route("/fetchdata", methods=['GET','POST'])
 def FetchEmp():
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
+    cursor.execute('SELECT * FROM employee WHERE emp_id = %s')
     data = cursor.fetchone()
     cursor.close()
     print(data[0])
@@ -101,7 +101,7 @@ def FetchEmp():
 @app.route("/deleteemp", methods=['POST'])
 def DeleteEmp():
     cursor = db_conn.cursor()
-    cursor.execute('DELETE FROM employees WHERE emp_id = {0}',format(emp_id))
+    cursor.execute('DELETE FROM employee WHERE emp_id = {0}',format(emp_id))
     db_conn.commit()
     print(data[0])
     return render_template('GetEmp.html')
@@ -115,7 +115,7 @@ def UpdateEmp(emp_id):
         pri_skill = request.form['pri_skill']
         location = request.form['location']
 
-        cursor.execute("""UPDATE employees SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
+        cursor.execute("""UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
         conn.commit()
         return render_template('GetEmp.html')
 
