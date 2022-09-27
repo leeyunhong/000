@@ -122,6 +122,32 @@ def fetchdata():
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
+@app.route('/delete-emp', methods=['GET','POST'])
+def DeleteEmp():
+    emp_id= request.form['emp_id']
+
+    mycursor = db_conn.cursor()
+    del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
+    mycursor.execute(del_emp_sql, (emp_id))
+    db_conn.commit()
+
+@app.route("/editemp", methods=['GET','POST'])
+def EditEmp():
+    if request.method == 'POST':
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        pri_skill = request.form['pri_skill']
+        location = request.form['location']
+        emp_id = request.form['emp_id']    
+
+        update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s"
+        cursor = db_conn.cursor()       
+
+        changefield = (first_name, last_name, pri_skill, location, emp_id)
+        
+    else:
+        return render_template('GetEmp.html', AddEmp=AddEmp)        
+
 # @app.route("/deleteemp", methods=['POST'])
 # def DeleteEmp():
 #     cursor = db_conn.cursor()

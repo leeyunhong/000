@@ -30,13 +30,41 @@
 
 			  		Location:<br> {{ location }} <br><br>
 					
-			  		<button type="submit" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color:black; font:oblique;" formaction="http://35.170.66.112:80/getemp">RESET</button><br><br>
+			  		<button type="submit" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color:black; font:oblique;" formaction="http://35.170.66.112:80/getemp">BACK</button><br><br>
 
 			  		</div>
 				</div>
 			</form>
 
 		</body>
+
+		<form action="/editemp" autocomplete="on" method = "POST" enctype="multipart/form-data">
+			<div class="myDiv">
+				<br>
+		  		Employee ID:<br> <input style="height:25px;font-size:14pt; color:rgb(209, 193, 228);" type="number" name="emp_id" autofocus size="40"><br><br>
+
+		  		First Name:<br> <input style="height:25px;font-size:14pt;color:rgb(209, 193, 228);" type="text" name="first_name" ><br><br>
+
+		  		Last Name:<br> <input style="height:25px;font-size:14pt;color:rgb(209, 193, 228);" type="text" name="last_name"><br><br>
+
+		  		Primary Skills:<br> <input style="height:25px;font-size:14pt;color:rgb(209, 193, 228);" type="text" name="pri_skill"><br><br>
+
+		  		Location:<br> <input style="height:25px;font-size:14pt;color:rgb(209, 193, 228);" type="text" name="location"><br><br>
+				<br>
+				<input type="submit" value="Update Database" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color: black; size: 5; font:oblique;">
+				<br>
+				<br>
+			</div>
+		</form>
+		<form action="/delete-emp" method="POST">
+			<div class="myDiv">
+				<label for="suggest_delete">Enter Employee ID for delete:</label>
+				<br>
+				<input style="height:25px;font-size:14pt;color:rgb(209, 193, 228);" type="text" name="emp_id" value="{{id}}" required>
+				<br>
+				<input class="btn" type="submit" name="delete" value="Delete" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color: black; size: 5; font:oblique;">
+			</div>
+		</form>
 
 	</font>
 </center>
