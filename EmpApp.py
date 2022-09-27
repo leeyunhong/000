@@ -116,8 +116,7 @@ def FetchEmp():
     cursor.execute('SELECT emp_id FROM employees')
     FetchEmp = cursor.fetchall()
     cursor.close()
-    print(FetchEmp[0])
-    return render_template('GetEmpOutput.html',FetchEmp=FetchEmp)
+    return render_template('GetEmpOutput.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
