@@ -18,7 +18,7 @@
 
 		<body bgcolor="lightyellow">
 
-			<form action="/edit" autocomplete="on" method="POST">
+			<form action="/fetchdata" autocomplete="on" method="POST">
 				<h2 style="color:purple">Enter Employee ID</h2>
 		  		Employee ID:
 				<br> 
@@ -26,7 +26,10 @@
 		  		<button type="submit" style="background:rgb(209, 193, 228); height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>		  		
 				
 			</form>
-			<button type="submit" formaction="http://35.170.66.112/" style="background:rgb(209, 193, 228); height: 50px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
+			<form action="/fetchdata" autocomplete="on" method="GET">
+				<div type="submit" autocomplete="on" formaction="/" method="POST">
+					<button type="submit" formaction="http://35.170.66.112/" style="background:rgb(209, 193, 228); height: 50px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
+				</div>
 		</body>
 
 	</font>

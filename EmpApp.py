@@ -26,10 +26,30 @@ def home():
     return render_template('AddEmp.html')
 
 
-@app.route("/about", methods=['POST'])
+@app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('www.intellipaat.com')
+    return render_template('AboutUs.html', about=about)
 
+@app.route("/getemp", methods=['GET','POST'])
+def GetEmp():
+    return render_template('GetEmp.html', GetEmp=GetEmp)
+
+def show_image(bucket):
+    s3_client = boto3.client('s3')
+    public_urls = []
+    
+    #check whether the emp_id inside the image_url
+    emp_id = request.form['emp_id']
+
+    try:
+        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            if emp_id in presigned_url:
+               public_urls.append(presigned_url)
+    except Exception as e:
+        pass
+    # print("[INFO] : The contents inside show_image = ", public_urls)
+    return public_urls
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -80,44 +100,49 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-@app.route("/getemp", methods=['POST'])
-def GetEmp():
-    cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employee')
-    data = cursor.fetchall()
-    cursor.close()
-    print(data[0])
-    return render_template('GetEmp.html', data=data)
+# @app.route("/getemp", methods=['POST'])
+# def GetEmp():
+#     cursor = db_conn.cursor()
+#     cursor.execute('SELECT * FROM employee')
+#     data = cursor.fetchall()
+#     cursor.close()
+#     print(data[0])
+#     return render_template('GetEmp.html', data=data)
 
 @app.route("/fetchdata", methods=['GET','POST'])
-def FetchEmp():
-    cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employee WHERE emp_id = %s')
-    data = cursor.fetchone()
-    cursor.close()
-    print(data[0])
-    return render_template('GetEmpOutput.html',data=data)
+def fetchdata():
+    if request.method == 'POST':
+        try:
+            emp_id = request.form['emp_id']
+            cursor = db_conn.cursor()
+            fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
+            cursor.execute(fetch_emp_sql,(emp_id))
+            emp= cursor.fetchall()  
+            (id,fname,lname,priSkill,location) = emp[0]
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
+    else:
+        return render_template('AddEmp.html', fetchdata=fetchdata)
 
-@app.route("/deleteemp", methods=['POST'])
-def DeleteEmp():
-    cursor = db_conn.cursor()
-    cursor.execute('DELETE FROM employee WHERE emp_id = {0}',format(emp_id))
-    db_conn.commit()
-    print(data[0])
-    return render_template('GetEmp.html')
+# @app.route("/deleteemp", methods=['POST'])
+# def DeleteEmp():
+#     cursor = db_conn.cursor()
+#     cursor.execute('DELETE FROM employee WHERE emp_id = {0}',format(emp_id))
+#     db_conn.commit()
+#     print(data[0])
+#     return render_template('GetEmp.html')
 
-@app.route("/updateemp", methods=['POST'])
-def UpdateEmp(emp_id):
-    cursor = db_conn.cursor()
-    if request.methods =='POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        pri_skill = request.form['pri_skill']
-        location = request.form['location']
+# @app.route("/updateemp", methods=['POST'])
+# def UpdateEmp(emp_id):
+#     cursor = db_conn.cursor()
+#     if request.methods =='POST':
+#         first_name = request.form['first_name']
+#         last_name = request.form['last_name']
+#         pri_skill = request.form['pri_skill']
+#         location = request.form['location']
 
-        cursor.execute("""UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
-        conn.commit()
-        return render_template('GetEmp.html')
+#         cursor.execute("""UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
+#         conn.commit()
+#         return render_template('GetEmp.html')
 
 
 
