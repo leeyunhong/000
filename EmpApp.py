@@ -157,9 +157,9 @@ def EditEmp():
         #     cursor.close()
 
         # print("all modification done...")
-        return render_template('SuccessUpdate.html', name=emp_name)
+        return render_template('SuccessUpdate.html')
     else:
-        return render_template('GetEmp.html', AddEmp=AddEmp)
+        return render_template('GetEmp.html')
 
 # @app.route("/deleteemp", methods=['POST'])
 # def DeleteEmp():
