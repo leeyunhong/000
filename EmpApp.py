@@ -85,7 +85,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
 
 
-@app.route("/getemp", methods=['POST'])
+@app.route("/getemp", methods=['GET','POST'])
 def GetEmp():
     cursor = db_conn.cursor()
     cursor.execute('SELECT * FROM employees WHERE emp_id = %s',(emp_id))
