@@ -114,7 +114,7 @@ def UpdateEmp(emp_id):
 def FetchEmp():
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM employees WHERE emp_id")
-    FetchEmp = cursor.fetchone()
+    FetchEmp = cursor.fetchall()
     cursor.close()
     return render_template('GetEmpOutput.html', FetchEmp=FetchEmp)
 
