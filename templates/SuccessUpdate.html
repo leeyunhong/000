@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Employee Information</title>
+</head>
+<style>
+.myDiv {
+  border: 5px outset purple;
+  background-color: lightpurple;
+  text-align: center;
+}
+</style>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+		<h1 style="color: Purple">UPDATE SUCCESSFUL</h1>
+
+		<body bgcolor="lightyellow">
+
+			<div class="myDiv">
+			<br>
+			<h2>Following Employee records have been update to the database.</h2><br>
+			<h2>ID: {{ id }}</h2><br>
+			<h2>NAME: {{ name }}</h2><br>
+			<title>Update Emp Output</title>
+				<form action="/getemp" autocomplete="on" method = "POST">
+					<div class="button">
+						<input type="submit" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color:black; font:oblique;" value="Go Back">
+					</div>
+			</form>
+			<br>
+		</body>
+
+	</font>
+</center>
+</html>

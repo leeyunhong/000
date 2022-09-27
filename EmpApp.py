@@ -130,6 +130,11 @@ def DeleteEmp():
     del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
+    try:
+        return render_template('SuccessDelete.html')
+    except Exception as e:
+        return render_template('UnsuccessDelete.html')
+
 
 @app.route("/editemp", methods=['GET','POST'])
 def EditEmp():
@@ -144,9 +149,18 @@ def EditEmp():
         cursor = db_conn.cursor()       
 
         changefield = (first_name, last_name, pri_skill, location, emp_id)
-        
+        try:
+            cursor.execute(update_sql, (changefield))
+            db_conn.commit()
+            emp_name = "" + first_name + " " + last_name
+
+        finally:
+            cursor.close()
+
+        print("all modification done...")
+        return render_template('SuccessUpdate.html', name=emp_name,id=emp_id)
     else:
-        return render_template('GetEmp.html', AddEmp=AddEmp)        
+        return render_template('GetEmp.html', AddEmp=AddEmp)
 
 # @app.route("/deleteemp", methods=['POST'])
 # def DeleteEmp():
