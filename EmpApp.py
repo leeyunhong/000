@@ -87,7 +87,7 @@ def GetEmp():
     data = cursor.fetchall()
     cursor.close()
     print(data[0])
-    return render_template('GetEmp.html', data=data)
+    return render_template('GetEmpOutput.html', data=data)
 
 @app.route("/deleteemp", methods=['POST'])
 def DeleteEmp():
@@ -113,7 +113,7 @@ def UpdateEmp(emp_id):
 @app.route("/fetchdata", methods=['GET','POST'])
 def FetchEmp():
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees WHERE emp_id={0}')
+    cursor.execute('SELECT * FROM employees')
     FetchEmp = cursor.fetchone()
     cursor.close()
     print(FetchEmp[0])
