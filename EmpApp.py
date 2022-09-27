@@ -117,7 +117,7 @@ def FetchEmp():
     cursor.execute(select_sql)
     FetchEmp = cursor.fetchall()
     cursor.close()
-    return render_template('GetEmpOutput.html',id=emp_id, fname=first_name, lname=last_name, interest=pri_skill, location=location)
+    return render_template('GetEmpOutput.html',FetchEmp=FetchEmp)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
