@@ -142,24 +142,24 @@ def EditEmp():
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         pri_skill = request.form['pri_skill']
-        location = request.form['location']   
+        location = request.form['location']
+        emp_id = request.form['emp_id']    
 
         update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s"
         cursor = db_conn.cursor()       
 
-        # changefield = (first_name, last_name, pri_skill, location)
-        # try:
-        #     cursor.execute(update_sql, (changefield))
-        #     db_conn.commit()
-        #     emp_name = "" + first_name + " " + last_name
+        changefield = (first_name, last_name, pri_skill, location, emp_id)
+        try:
+            cursor.execute(update_sql, (changefield))
+            db_conn.commit()
+            emp_name = "" + first_name + " " + last_name
 
-        # finally:
-        #     cursor.close()
+        finally:
+            cursor.close()
 
-        # print("all modification done...")
-        return render_template('SuccessUpdate.html')
+        return render_template('SuccessUpdate.html', name=emp_name,id=emp_id)
     else:
-        return render_template('GetEmp.html')
+        return render_template('GetEmp.html', AddEmp=AddEmp)
 
 # @app.route("/deleteemp", methods=['POST'])
 # def DeleteEmp():
