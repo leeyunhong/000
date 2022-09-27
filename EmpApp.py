@@ -107,7 +107,6 @@ def DeleteEmp():
 def UpdateEmp():
     cursor = db_conn.cursor()
     if request.methods == 'POST':
-    emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
@@ -117,7 +116,7 @@ def UpdateEmp():
     conn.commit()
     return render_template('GetEmp.html')
 
-    
+
 
 
 
