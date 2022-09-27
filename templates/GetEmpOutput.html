@@ -20,17 +20,42 @@
 		<body bgcolor="lightyellow">
 					<div>
 
-			  		Employee ID:<br> {{ id }} <br><br>
+			  		<!-- Employee ID:<br> {{ data.id }} <br><br>
 
-			  		First Name:<br> {{ fname }} <br><br>
+			  		First Name:<br> {{ data.fname }} <br><br>
 
-			  		Last Name:<br> {{ lname }} <br><br>
+			  		Last Name:<br> {{ data.lname }} <br><br>
 
-			  		Primary Interest:<br> {{ interest }} <br><br>
+			  		Primary Interest:<br> {{ data.interest }} <br><br>
 
-			  		Location:<br> {{ location }} <br><br>
-
-
+			  		Location:<br> {{ data.location }} <br><br>
+					-->
+					<table id="example" class="table table-striped table-bordered" style="width:100%">
+						<thead>
+						  <tr>
+							<td>Employee ID</td>
+							<td>First Name</td>
+							<td>Last Name</td>
+							<td>Interest</td>
+							<td>Location</td>
+						  </tr>
+						</thead>
+						<tbody>
+						  {% for data in employee %}
+						  <tr>
+							<td>{{ data.emp_id }}</td>
+							<td>{{ data.first_name }}</td>
+							<td>{{ data.last_name }}</td>
+							<td>{{ data.pri_skill }}</td>
+							<td>{{ data.location }}</td>
+							<td width="130">
+							  <a href="/edit/{{data.emp_id}}" class="button button">edit</a>
+							  <a href="/delete/{{data.emp_id}}" class="button button2">delete</a>
+							</td>
+						  </tr>
+						  {% endfor %}
+						</tbody>
+					  </table>
 			  		<button type="submit" style="background: rgb(209, 193, 228); height: 45px; width: 200px; color:black; font:oblique;" formaction="http://35.170.66.112:80/getemp">RESET</button><br><br>
 
 			  		</div>
