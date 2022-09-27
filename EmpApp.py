@@ -81,12 +81,11 @@ def AddEmp():
     return render_template('AddEmpOutput.html', name=emp_name)
 
 @app.route("/getemp", methods=['POST'])
-def GetEmp():
+def GetEmp(emp_id):
     cursor = db_conn.cursor()
     cursor.execute('SELECT * FROM employees WHERE emp_id = %s',(emp_id))
     data = cursor.fetchall()
     cursor.close()
-
     print(data[0])
     return render_template('Getemp.html', employees = data[0])
 
@@ -117,7 +116,6 @@ def FetchEmp(emp_id):
     cursor.execute("""SELECT * FROM employees WHERE emp_id = %s""", (emp_id))
     FetchEmp = cursor.fetchone()
     return render_template('GetEmpOutput.html')
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
