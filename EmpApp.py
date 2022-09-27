@@ -147,7 +147,7 @@ def EditEmp():
         update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s"
         cursor = db_conn.cursor()       
 
-        changefield = (first_name, last_name, pri_skill, location, emp_id)
+        changefield = (first_name, last_name, pri_skill, location)
         try:
             cursor.execute(update_sql, (changefield))
             db_conn.commit()
@@ -157,7 +157,7 @@ def EditEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('SuccessUpdate.html', name=emp_name,id=emp_id)
+        return render_template('SuccessUpdate.html', name=emp_name)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
