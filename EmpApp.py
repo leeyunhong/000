@@ -83,3 +83,41 @@ def AddEmp():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
+
+
+@app.route("/getemp", methods=['POST'])
+def GetEmp():
+    cursor = db_conn.cursor()
+    cursor.execute('SELECT * FROM employees WHERE emp_id = %s',(emp_id))
+    data = cursor.fetchall()
+    cursor.close()
+
+    print(data[0])
+    return render_template('GetEmpOutput.html', employees = data[0])
+
+@app.route("/deleteemp", methods=['POST'])
+def DeleteEmp():
+    cursor = db_conn.cursor()
+    cursor.execute('DELETE FROM employees WHERE emp_id = {0}',format(emp_id))
+    db_conn.commit()
+    print(data[0])
+    return render_template('GetEmp.html')
+
+@app.route("/Updateemp", methods=['POST'])
+def UpdateEmp():
+    cursor = db_conn.cursor()
+    if request.methods == 'POST':
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+
+    cursor.execute("UPDATE employees SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s",(first_name,last_name,pri_skill,location))
+    conn.commit()
+    return render_template('GetEmp.html')
+
+    
+
+
+
