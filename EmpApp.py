@@ -93,7 +93,7 @@ def GetEmp():
     cursor.close()
 
     print(data[0])
-    return render_template('GetEmpOutput.html', employees = data[0])
+    return render_template('Getemp.html', employees = data[0])
 
 @app.route("/deleteemp", methods=['POST'])
 def DeleteEmp():
