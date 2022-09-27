@@ -110,10 +110,10 @@ def UpdateEmp(emp_id):
         conn.commit()
         return render_template('GetEmp.html')
 
-@app.route("/fetchdata", methods=['GET','POST'])
-def FetchEmp():
+@app.route("/fetchdata/<emp_id>", methods=['GET','POST'])
+def FetchEmp(emp_id):
     cursor = db_conn.cursor()
-    cursor.execute('SELECT * FROM employees')
+    cursor.execute('SELECT * FROM employees WHERE id = %s', (emp_id)')
     FetchEmp = cursor.fetchall()
     cursor.close()
     print(FetchEmp[0])
