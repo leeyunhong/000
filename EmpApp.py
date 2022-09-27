@@ -112,8 +112,8 @@ def UpdateEmp(emp_id):
 
 @app.route("/fetchdata", methods=['POST'])
 def FetchEmp():
-    select_sql = """SELECT * FROM employees"""
     cursor = db_conn.cursor()
+    select_sql = """SELECT * FROM employees"""
     cursor.execute(select_sql)
     FetchEmp = cursor.fetchall()
     cursor.close()
