@@ -114,7 +114,7 @@ def UpdateEmp(emp_id):
 def FetchEmp():
     select_sql = """SELECT * FROM employees"""
     cursor = db_conn.cursor()
-    cursor.execute(select_sql, (emp_id, first_name, last_name, pri_skill, location))
+    cursor.execute(select_sql)
     FetchEmp = cursor.fetchall()
     cursor.close()
     return render_template('GetEmpOutput.html',id=emp_id, fname=first_name, lname=last_name, interest=pri_skill, location=location)
