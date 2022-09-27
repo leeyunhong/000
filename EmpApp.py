@@ -114,22 +114,10 @@ def UpdateEmp(emp_id):
 def FetchEmp():
     select_sql = """SELECT * FROM employees"""
     cursor = db_conn.cursor()
-    cursor.execute(select_sql)
+    cursor.execute(select_sql, (emp_id, first_name, last_name, pri_skill, location))
     FetchEmp = cursor.fetchall()
     cursor.close()
-    p = []
-    tbl = "<tr><td>ID</td><td>FirstName</td><td>LastName</td><td>Interest</td><td>Location</td></tr>"
-    p.append(tbl)
-    for row in result:
-    a = "<tr><td>%s</td>"%row[0]
-    p.append(a)
-    b = "<td>%s</td>"%row[1]
-    p.append(b)
-    c = "<td>%s</td>"%row[2]
-    p.append(c)
-    d = "<td>%s</td></tr>"%row[3]
-    p.append(d)
-    return render_template('GetEmpOutput.html')
+    return render_template('GetEmpOutput.html',id=emp_id, fname=first_name, lname=last_name, interest=pri_skill, location=location)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
