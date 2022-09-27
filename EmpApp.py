@@ -110,13 +110,13 @@ def UpdateEmp(emp_id):
         conn.commit()
         return render_template('GetEmp.html')
 
-@app.route("/fetchdata", methods=['POST'])
+@app.route("/fetchdata", methods=['GET','POST'])
 def FetchEmp():
     cursor = db_conn.cursor()
-    select_sql = """SELECT * FROM employees"""
-    cursor.execute(select_sql)
+    cursor.execute('SELECT * FROM employees')
     FetchEmp = cursor.fetchall()
     cursor.close()
+    print(FetchEmp[0])
     return render_template('GetEmpOutput.html',FetchEmp=FetchEmp)
 
 if __name__ == '__main__':
