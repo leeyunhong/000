@@ -112,7 +112,6 @@ def AddEmp():
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
     if request.method == 'POST':
-        try:
             emp_id = request.form['emp_id']
             cursor = db_conn.cursor()
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
