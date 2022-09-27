@@ -19,38 +19,12 @@
 		<body bgcolor="lightyellow">
 
 			<form action="/edit" autocomplete="on" method="POST">
-				<!--<h2 style="color:purple">Enter Employee ID</h2>
+				<h2 style="color:purple">Enter Employee ID</h2>
 		  		Employee ID:
 				<br> 
 				<input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
 		  		<button type="submit" style="background:rgb(209, 193, 228); height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>		  		
-				-->
-				<table id="example" class="table table-striped table-bordered" style="width:100%">
-					<thead>
-					  <tr>
-						<td>Employee ID</td>
-						<td>First Name</td>
-						<td>Last Name</td>
-						<td>Interest</td>
-						<td>Location</td>
-					  </tr>
-					</thead>
-					<tbody>
-					  {% for data in employee %}
-					  <tr>
-						<td>{{ data.emp_id }}</td>
-						<td>{{ data.first_name }}</td>
-						<td>{{ data.last_name }}</td>
-						<td>{{ data.pri_skill }}</td>
-						<td>{{ data.location }}</td>
-						<td width="130">
-						  <a href="/edit/{{data.emp_id}}" class="button button">edit</a>
-						  <a href="/delete/{{data.emp_id}}" class="button button2">delete</a>
-						</td>
-					  </tr>
-					  {% endfor %}
-					</tbody>
-				  </table>
+				
 			</form>
 			<button type="submit" formaction="http://35.170.66.112/" style="background:rgb(209, 193, 228); height: 50px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
 		</body>

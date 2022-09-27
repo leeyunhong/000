@@ -80,81 +80,44 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-#@app.route("/getemp", methods=['POST'])
-#def GetEmp():
-#    cursor = db_conn.cursor()
-#    cursor.execute('SELECT * FROM employees')
-#    data = cursor.fetchall()
-#    cursor.close()
-#    print(data[0])
-#    return render_template('GetEmp.html', data=data)
-
-@app.route('/getemp', methods = ['POST', 'GET'])
-def ViewEmp():
-    cursor = db_conn.cursor(pymysql.cursor.DictCursor)
-    cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
-    data = cur.fetchall()
+@app.route("/getemp", methods=['POST'])
+def GetEmp():
+    cursor = db_conn.cursor()
+    cursor.execute('SELECT * FROM employees')
+    data = cursor.fetchall()
     cursor.close()
     print(data[0])
-    return render_template('GetEmpOutput.html', employees = data[0])
+    return render_template('GetEmp.html', data=data)
 
-@app.route('/update/<emp_id>', methods=['POST'])
+@app.route("/fetchdata", methods=['GET','POST'])
+def FetchEmp():
+    cursor = db_conn.cursor()
+    cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
+    data = cursor.fetchone()
+    cursor.close()
+    print(data[0])
+    return render_template('GetEmpOutput.html',data=data)
+
+@app.route("/deleteemp", methods=['POST'])
+def DeleteEmp():
+    cursor = db_conn.cursor()
+    cursor.execute('DELETE FROM employees WHERE emp_id = {0}',format(emp_id))
+    db_conn.commit()
+    print(data[0])
+    return render_template('GetEmp.html')
+
+@app.route("/updateemp", methods=['POST'])
 def UpdateEmp(emp_id):
     cursor = db_conn.cursor()
-    if request.method == 'POST':
+    if request.methods =='POST':
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         pri_skill = request.form['pri_skill']
         location = request.form['location']
 
-        cursor.execute("""
-            UPADTE `employees`
-            SET first_name = %s,
-                last_name = %s,
-                pri_skill = %s,
-                location = %s
-            WHERE emp_id = %s
-        """,(first_name, last_name, pri_skill, location, emp_id))
-        db_conn.commit()
+        cursor.execute("""UPDATE employees SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
+        conn.commit()
         return render_template('GetEmp.html')
-
-@app.route('/delete/<string:emp_id>', methods = ['POST','GET'])
-def DeleteEmp(id):
-    cursor = db_conn.cursor()
-    cursor.execute(f"DELETE FROM `employees` E where E.emp_id = {emp_id}" )
-    db_conn.commit()
-    return render_template('GetEmp.html')
-
-
-#@app.route("/fetchdata", methods=['GET','POST'])
-#def FetchEmp():
-#    cursor = db_conn.cursor()
- #   cursor.execute('SELECT * FROM employees WHERE emp_id = %s')
-  #  data = cursor.fetchone()
-  #  cursor.close()
-  #  print(data[0])
-  #  return render_template('GetEmpOutput.html',data=data)
-
-#@app.route("/deleteemp", methods=['POST'])
-#def DeleteEmp():
-#    cursor = db_conn.cursor()
-#    cursor.execute('DELETE FROM employees WHERE emp_id = {0}',format(emp_id))
-#    db_conn.commit()
-#    print(data[0])
-#    return render_template('GetEmp.html')
-
-#@app.route("/updateemp", methods=['POST'])
-#def UpdateEmp(emp_id):
-#    cursor = db_conn.cursor()
-#    if request.methods =='POST':
-#        first_name = request.form['first_name']
-#        last_name = request.form['last_name']
-#        pri_skill = request.form['pri_skill']
-#        location = request.form['location']
-
-#        cursor.execute("""UPDATE employees SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
-#        conn.commit()
-#        return render_template('GetEmp.html')
 
 
 
