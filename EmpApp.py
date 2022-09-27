@@ -113,10 +113,10 @@ def UpdateEmp(emp_id):
 @app.route("/fetchdata", methods=['GET','POST'])
 def FetchEmp():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM employees")
+    cursor.execute("SELECT * FROM employees WHERE emp_id")
     FetchEmp = cursor.fetchone()
     cursor.close()
-    return render_template('GetEmpOutput.html', id=emp_id, fname=first_name, lname=last_name, interest=pri_skill, location=location)
+    return render_template('GetEmpOutput.html', FetchEmp=FetchEmp)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
