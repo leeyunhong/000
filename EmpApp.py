@@ -119,15 +119,14 @@ def fetchdata():
             cursor.execute(fetch_emp_sql,(emp_id))
             emp= cursor.fetchall()
 
+            (id,fname,lname,priSkill,location) = emp[0]
+
             att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
             mycursor = db_conn.cursor()
             mycursor.execute(att_emp_sql, (emp_id))
             att_result= mycursor.fetchall()
 
-            (id,fname,lname,priSkill,location) = emp[0]
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
-
-
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,att_result=att_result)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
@@ -226,10 +225,6 @@ def AttendanceEmp():
 #         cursor.execute("""UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s,location=%s WHERE emp_id = %s""",(first_name,last_name,pri_skill,location))
 #         conn.commit()
 #         return render_template('GetEmp.html')
-
-
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
