@@ -154,7 +154,14 @@ def fetchdata():
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
             emp= cursor.fetchall()  
+            
             (id,fname,lname,priSkill,location) = emp[0]
+
+            att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
+            mycursor = db_conn.cursor()
+            mycursor.execute(att_emp_sql, (emp_id))
+            att_result= mycursor.fetchall()
+
             return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
