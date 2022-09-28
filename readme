@@ -5,7 +5,7 @@
 sudo -i
 yum update -y
 yum install git -y
-git clone https://github.com/leeyunhong/aws-live-assignment.git
+git clone https://github.com/leeyunhong/aws-live-main.git
 cd aws-live-assignment
 pip3 install flask
 pip3 install pymysql
