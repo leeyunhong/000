@@ -173,7 +173,6 @@ def EditEmp():
 def AttendanceEmp():
     if request.method == 'POST':
 
-        # datetime object containing current date and time
         now = datetime.now()
         dt_string = now.strftime("%d%m%Y%H%M%S")
         d_string = now.strftime("%d/%m/%Y")
@@ -184,8 +183,6 @@ def AttendanceEmp():
         time = request.form['time'] + t_string
         attendance = request.form.getlist('attendance')
         emp_id = request.form['emp_id']
-
-        # cursor = db_conn.cursor(db_conn.cursors.DictCursor)
         
         attendance = ','.join(attendance)
         att_values = (attendance)
