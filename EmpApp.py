@@ -34,6 +34,42 @@ def about():
 def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
+@app.route('/attendance-emp', methods=['GET','POST'])
+def AttendanceEmp():
+    if request.method == 'POST':
+
+        # datetime object containing current date and time
+        now = datetime.now()
+        dt_string = now.strftime("%d%m%Y%H%M%S")
+        d_string = now.strftime("%d/%m/%Y")
+        t_string = now.strftime("%H:%M:%S")
+
+        attendance_id = request.form['attendance_id'] + dt_string
+        date = request.form['date'] + d_string
+        time = request.form['time'] + t_string
+        attendance = request.form.getlist('attendance')
+        emp_id = request.form['emp_id']
+
+        # cursor = db_conn.cursor(db_conn.cursors.DictCursor)
+        
+        attendance = ','.join(attendance)
+        att_values = (attendance)
+
+        try:
+
+            insert_att_sql = 'INSERT INTO attendance VALUES (%s,%s,%s,%s,%s)'
+            cursor = db_conn.cursor()
+
+            cursor.execute(insert_att_sql, (attendance_id,date,time,att_values,emp_id))
+            db_conn.commit()
+
+            return render_template('SuccessTakeAttendance.html', Id = attendance_id )
+        except Exception as e:
+                return str(e)
+
+        finally:
+            cursor.close()
+
 def show_image(bucket):
     s3_client = boto3.client('s3')
     public_urls = []
