@@ -82,7 +82,7 @@
 					<input type="hidden" name="time" value="">
 				</div>
 
-				<b><label for="">Tick For Attendance</label><br></b>
+				<label for="">Tick For Attendance</label><br>
 				<div id="checkboxgroup">
 					<input type="checkbox" name="attendance" value="Present" checked> Present<br>
 					<input type="checkbox" name="attendance" value="Absent"> Absent<br>
@@ -118,10 +118,11 @@
 		<br>
 		<form>
 			<div class="myDiv">
-			<h3>Employees Attendances Results</h3>
+			<label>Employees Attendances Results</label>
+			<br>
 			<br>
 			{% for attendance in att_result %}
-			{{'{0[0]:60s} {0[1]:20s} {0[2]:20s}'.format(attendance)}}
+			{{attendance}}
 			<br>
 			{% endfor %}
 			</div>
